@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.6.5.Final</version><!--$NO-MVN-MAN-VER$-->
+			<version>5.6.5.Final</version>
 		</dependency>
 	</dependencies>
 	<!-- 指定較低Hibernate版本因碰到此問題: https://github.com/spring-projects/spring-data-jpa/issues/2472 -->

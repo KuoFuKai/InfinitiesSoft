@@ -24,7 +24,7 @@ public class Book {
 	@Column(name = "author", nullable = false)
 	private String author;
 	@Column(name = "translator")
-	private String translator;
+	private String translator = ""; //default empty value in order to prevent null to affect LIKE query in repository.
 	@Column(name = "isbn", nullable = false)
 	private String isbn;
 	@Column(name = "publisher", nullable = false)

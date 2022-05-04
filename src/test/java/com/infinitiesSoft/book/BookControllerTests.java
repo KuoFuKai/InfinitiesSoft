@@ -50,7 +50,7 @@ class BookControllerTests {
 	@Order(1)
 	void createBook() throws Exception {
 		mockMvc.perform(post("/book").contentType(MediaType.APPLICATION_JSON)
-			.content(objectMapper.writeValueAsString(new Book(1, "Java: 從入門到放棄1", "郭富凱", "吳育慧", "123", "虎林街", "2022-04-26", "5"))))
+			.content(objectMapper.writeValueAsString(new Book(1, "Java: From zero to give up1", "Kuo Fu-Kai", "Wu Yu-Huei", "123", "Hu-Lin St", "2022-04-26", "5"))))
 			.andExpect(status().isCreated())
 			.andDo(print());
 	}
@@ -59,7 +59,7 @@ class BookControllerTests {
 	@Test
 	@Order(2)
 	void findBookWithId() throws Exception {
-		Book book = new Book(id, "Java: 從入門到放棄1", "郭富凱", "吳育慧", "123", "虎林街", "2022-04-26", "5");
+		Book book = new Book(id, "Java: From zero to give up1", "Kuo Fu-Kai", "Wu Yu-Huei", "123", "Hu-Lin St", "2022-04-26", "5");
 		when(bookRepository.findById(id)).thenReturn(Optional.of(book));
 		mockMvc.perform(get("/book/{id}", id)).andExpect(status().isOk())
 			.andExpect(jsonPath("$.id").value(id))
@@ -86,9 +86,9 @@ class BookControllerTests {
 	@Order(4)
 	void findBooks() throws Exception {
 		List<Book> books = new ArrayList<>(
-			Arrays.asList(new Book(1, "Java: 從入門到放棄1", "郭富凱", "吳育慧", "123", "虎林街", "2022-04-26", "5"),
-						  new Book(2, "Java: 從入門到放棄2", "郭富凱", "吳育慧", "456", "文恩路", "2022-04-27", "50"),
-						  new Book(3, "C#: 從入門到放棄1", "吳育慧", "郭富凱", "789", "虎林街", "2022-04-28", "500")));
+			Arrays.asList(new Book(1, "Java: From zero to give up1", "Kuo Fu-Kai", "Wu Yu-Huei", "123", "Hu-Lin St", "2022-04-26", "5"),
+						  new Book(2, "Java: From zero to give up2", "Kuo Fu-Kai", "Wu Yu-Huei", "456", "Wen-en Rd", "2022-04-27", "50"),
+						  new Book(3, "C#: From zero to give up1", "Wu Yu-Huei", "Kuo Fu-Kai", "789", "Hu-Lin St", "2022-04-28", "500")));
 		when(bookRepository.findAll()).thenReturn(books);
 		mockMvc.perform(get("/book"))
 			.andExpect(status().isOk())
@@ -109,8 +109,8 @@ class BookControllerTests {
 	@Test
 	@Order(6)
 	void findBooksWithParams() throws Exception {
-		List<Book> books = new ArrayList<Book>(Arrays.asList(new Book(1, "Java: 從入門到放棄1", "郭富凱", "吳育慧", "123", "虎林街", "2022-04-26", "5"), 
-															 new Book(2, "Java: 從入門到放棄2", "郭富凱", "吳育慧", "456", "文恩路", "2022-04-27", "50")));
+		List<Book> books = new ArrayList<Book>(Arrays.asList(new Book(1, "Java: From zero to give up1", "Kuo Fu-Kai", "Wu Yu-Huei", "123", "Hu-Lin St", "2022-04-26", "5"), 
+															 new Book(2, "Java: From zero to give up2", "Kuo Fu-Kai", "Wu Yu-Huei", "456", "Wen-en Rd", "2022-04-27", "50")));
 		MultiValueMap<String, String> paramsMap = new LinkedMultiValueMap<>();
 		paramsMap.add("name", "Java");
 		paramsMap.add("author", "郭");
@@ -135,8 +135,8 @@ class BookControllerTests {
 	@Test
 	@Order(8)
 	void updateBook() throws Exception {
-		Book updatedbook = new Book(id, "胃痛怎麼辦?", "吳育慧", "郭富凱", "ABC", "文恩路", "2022-04-29", "5000");
-		Book book = new Book(id, "Java: 從入門到放棄1", "郭富凱", "吳育慧", "123", "虎林街", "2022-04-26", "5");
+		Book updatedbook = new Book(id, "What can we do when stomach-ache?", "Wu Yu-Huei", "Kuo Fu-Kai", "ABC", "Wen-en Rd", "2022-04-29", "5000");
+		Book book = new Book(id, "Java: From zero to give up1", "Kuo Fu-Kai", "Wu Yu-Huei", "123", "Hu-Lin St", "2022-04-26", "5");
 		when(bookRepository.findById(id)).thenReturn(Optional.of(book));
 		when(bookRepository.save(any(Book.class))).thenReturn(updatedbook);
 		mockMvc.perform(put("/book/{id}", id).contentType(MediaType.APPLICATION_JSON)
@@ -155,7 +155,7 @@ class BookControllerTests {
 	@Test
 	@Order(9)
 	void updateBookIsNotFound() throws Exception {
-		Book updatedbook = new Book(id, "胃痛怎麼辦?", "吳育慧", "郭富凱", "ABC", "文恩路", "2022-04-29", "5000");
+		Book updatedbook = new Book(id, "What can we do when stomach-ache?", "Wu Yu-Huei", "Kuo Fu-Kai", "ABC", "Wen-en Rd", "2022-04-29", "5000");
 		when(bookRepository.findById(id)).thenReturn(Optional.empty());
 		mockMvc.perform(put("/book/{id}", id).contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(updatedbook)))
