@@ -207,5 +207,5 @@ We need to using above data structure as payload in create or update scenario, f
     
     ```docker
     docker build -t infinitiessoft_demo_project.jar .
-    docker run -p 9090:8080 spring-boot-docker.jar
+    docker run -p 9090:8080 infinitiessoft_demo_project.jar
     ```
